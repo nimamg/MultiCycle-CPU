@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite, clk, rst, output reg[7:0] out);
-    reg[7:0] mem [31:0];
+    reg[7:0] mem [0:31];
 
     initial begin
 		// memory[0] = 8'b10011001;
@@ -25,7 +25,7 @@ module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite,
 		mem[1] = 8'b10011101;	// push 8 in St
 		mem[2] = 8'b00000000;	// add 8 + 8 and stoers 16 in St
 		mem[3] = 8'b11000111;	// jump to instruction 7
-		mem[7] = 8'b11101100;	// does not jumpz to 12 
+		mem[7] = 8'b11101100;	// does not jumpz to 12
 		mem[8] = 8'b10011110;	// push 16 on St
 		mem[9] = 8'b00100000;	// sub 16 - 16 and store 0 on St
 		mem[10] = 8'b11101111;	// jumpz 15
@@ -44,13 +44,14 @@ module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite,
 	end
 
     always @(posedge clk, posedge rst) begin
-        if (rst)
-            out <= 8'b0;
+        // if (rst) begin
+        //
+        // end
         else begin
             if (memRead)
                 out <= mem[address];
             else if (memWrite)
-                mem[address] <= writeData;    
+                mem[address] <= writeData;
         end
     end
 endmodule
