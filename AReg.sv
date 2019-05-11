@@ -2,7 +2,7 @@
 
 module ALUReg(input[7:0] inp, input ldA, clk, rst, output[7:0] out);
     always @(posedge rst, posedge clk) begin
-        if (clk)
+        if (rst)
             out <= 8'b0;
         else if (ldA)
             out <= inp;
