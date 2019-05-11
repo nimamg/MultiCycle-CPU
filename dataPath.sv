@@ -30,4 +30,6 @@ module dataPath(input [1:0] ALUOP, input pcWriteUnCond, pcWriteCond, IorD, memRe
     ALU ALUModule(AOut, BOut, ALUOP, ALUOut);
 
     ALUReg ALURegModule(ALUOut, clk, rst, ALURegOut);
+
+    assign opc = IROut[7:5];
 endmodule
