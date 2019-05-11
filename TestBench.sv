@@ -5,6 +5,7 @@ module TB();
   CPU processor (clk, rst);
   always #10 clk = ~clk;
   initial begin
+    #100;
     rst = 1;
     #100;
     rst = 0;
