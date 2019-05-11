@@ -1,11 +1,12 @@
 `timescale 1ns/1ns
 
-module dataPath(input pcWriteUnCond, pcWriteCond, IorD, memRead, memWrite, IRWrite, MtoS, push, pop, tos, ldA, ldB, srcA, srcB, pcSrc, clk, rst, output[2:0] opc);
+module dataPath(input [1:0] ALUOP, input pcWriteUnCond, pcWriteCond, IorD, memRead, memWrite, IRWrite, MtoS, push, pop, tos, ldA, ldB, srcA, srcB, pcSrc, clk, rst, output[2:0] opc);
     wire pcWrite, zero;
     wire[4:0] pcIn, pcOut, address;
-    wire[7:0] AOut, BOut, memOut, MDROut, stackOut, din, ALURegOut, ALUA, ALUB;
+    wire[7:0] AOut, BOut, memOut, MDROut, stackOut, din, ALURegOut, ALUA, ALUB, ALUOut, IROut;
 
     assign pcWrite = pcWriteUnCond || (pcWriteCond && zero);
+    assign pcIn = pcSrc == 1'b0 ? ALUOut[4:0] : IROut[4:0];
     pcReg pcModule(pcIn, pcWrite, clk, rst, pcOut);
 
     assign address = IorD == 1'b0 ? pcOut : IROut[4:0];
@@ -24,5 +25,9 @@ module dataPath(input pcWriteUnCond, pcWriteCond, IorD, memRead, memWrite, IRWri
 
     ZReg ZRegModule(stackOut, clk, rst, zero);
 
-    assign ALUA = 
+    assign ALUA = srcA == 1'b0 ? AOut : {3'b0, pcOut};
+    assign ALUB = srcB == 1'b0 ? BOut : 8'b00000001;
+    ALU ALUModule(AOut, BOut, ALUOP, ALUOut);
+
+    ALUReg ALURegModule(ALUOut, clk, rst, ALURegOut);
 endmodule
