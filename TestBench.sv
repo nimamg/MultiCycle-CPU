@@ -1,7 +1,7 @@
 `timescale 1ns/1ns
 
 module TB();
-  reg rst, clk;
+  reg rst, clk = 0;
   CPU processor (clk, rst);
   always #10 clk = ~clk;
   initial begin
