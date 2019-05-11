@@ -24,6 +24,7 @@ module controller (input clk, rst, input [2:0] opcode, output IorD, srcA, srcB, 
           loadB: ns <= ALUfunc;
           ALUfunc: ns <= pushRes;
           pushRes: ns <= If;
+        endcase
       end
       always @ (ps /*opcode may be needed*/) begin
         {IorD, srcA, srcB, lda, ldb, PCsrc, PCwrite, memRead, IRwrite, tos, pop, push, MtoS, PCwriteCond, memWrite, ALUop} = 16'b0
