@@ -12,12 +12,12 @@ module controller (input clk, rst, input [2:0] opcode, output IorD, srcA, srcB, 
       always @ (ps, opcode) begin
         case (ps)
           If: ns <= getTop;
-          getTop: ns <= (opcode == 3'b100) ? readFromMem : (opcode == 3'b110) ? jump : (opcode == 3'b111) branch : popStage;
+          getTop: ns <= (opcode == 3'b100) ? readFromMem : (opcode == 3'b110) ? jump : (opcode == 3'b111) ? branch : popStage;
           readFromMem: ns <= pushFromMem;
           jump: ns <= If;
           branch: ns <= If;
           popStage: ns <= loadA;
-          loadA: ns <= (opcode == 3'b101) ? writeToMem : (opcode == 3'b011) ALUfuncNot : secOprndPop;
+          loadA: ns <= (opcode == 3'b101) ? writeToMem : (opcode == 3'b011) ? ALUfuncNot : secOprndPop;
           writeToMem: ns <= If;
           ALUfuncNot: ns <= pushRes;
           secOprndPop: ns <= loadB;
@@ -27,7 +27,7 @@ module controller (input clk, rst, input [2:0] opcode, output IorD, srcA, srcB, 
         endcase
       end
       always @ (ps /*opcode may be needed*/) begin
-        {IorD, srcA, srcB, lda, ldb, PCsrc, PCwrite, memRead, IRwrite, tos, pop, push, MtoS, PCwriteCond, memWrite, ALUop} = 16'b0
+        {IorD, srcA, srcB, lda, ldb, PCsrc, PCwrite, memRead, IRwrite, tos, pop, push, MtoS, PCwriteCond, memWrite, ALUop} = 16'b0;
         case (ps)
           If: begin
             IorD = 0;
