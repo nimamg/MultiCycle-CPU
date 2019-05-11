@@ -68,7 +68,7 @@ module controller (input clk, rst, input [2:0] opcode,  output reg IorD, srcA, s
           end
           branch: begin
             PCwriteCond = 1;
-            PCsrc = 1;``
+            PCsrc = 1;
           end
           ALUfuncNot: begin
             ALUop = 3;
