@@ -47,11 +47,11 @@ module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite,
         // if (rst) begin
         //
         // end
-        else begin
+        // else begin
             if (memRead)
                 out <= mem[address];
             else if (memWrite)
                 mem[address] <= writeData;
         end
-    end
+    // end
 endmodule
