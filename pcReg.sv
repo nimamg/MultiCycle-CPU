@@ -6,7 +6,7 @@ module pcReg(input[4:0] in, input write, clk, rst, output reg[4:0] out);
             out <= 0;
         else if (write)
             out <= in;
-        else 
-            out <= out + 1;
+        else
+            out <= out;
     end
 endmodule
