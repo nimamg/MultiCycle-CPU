@@ -11,3 +11,4 @@ module TB();
     #100000;
     $stop;
   end
+endmodule
