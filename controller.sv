@@ -81,3 +81,4 @@ module controller (input clk, rst, input [2:0] opcode, output IorD, srcA, srcB, 
           end
         endcase
       end
+endmodule
