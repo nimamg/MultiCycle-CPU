@@ -49,9 +49,9 @@ module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite,
         // end
         // else begin
             if (memRead)
-                out <= mem[address];
+                out = mem[address];
             else if (memWrite)
-                mem[address] <= writeData;
+                mem[address] = writeData;
         end
     // end
 endmodule
