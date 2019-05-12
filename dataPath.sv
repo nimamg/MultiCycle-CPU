@@ -27,7 +27,7 @@ module dataPath(input [1:0] ALUOP, input pcWriteUnCond, pcWriteCond, IorD, memRe
 
     assign ALUA = srcA == 1'b0 ? AOut : {3'b0, pcOut};
     assign ALUB = srcB == 1'b0 ? BOut : 8'b00000001;
-    ALU ALUModule(AOut, BOut, ALUOP, ALUOut);
+    ALU ALUModule(ALUA, ALUB, ALUOP, ALUOut);
 
     ALUReg ALURegModule(ALUOut, clk, rst, ALURegOut);
 
