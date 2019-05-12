@@ -21,7 +21,7 @@ module stack(input[7:0] din, input push, pop, tos, clk, rst, output reg[7:0] dou
                 dout = mem[top];
             end
             if (tos) begin
-                dout <= mem[top];
+                dout = mem[top - 1];
             end
         end
     end
