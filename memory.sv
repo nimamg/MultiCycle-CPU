@@ -42,15 +42,13 @@ module memory(input[4:0] address, input[7:0] writeData, input memRead, memWrite,
 		mem[30] = 8'b00010000;
 
 	end
-
+    assign out = mem[address];
     always @(posedge clk, posedge rst) begin
         // if (rst) begin
         //
         // end
         // else begin
-            if (memRead)
-                out = mem[address];
-            else if (memWrite)
+            if (memWrite)
                 mem[address] = writeData;
         end
     // end
