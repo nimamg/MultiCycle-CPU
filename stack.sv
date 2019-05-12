@@ -9,19 +9,22 @@ module stack(input[7:0] din, input push, pop, tos, clk, rst, output reg[7:0] dou
             for (i = 0 ; i < 32 ; i = i + 1) begin
               mem[i] = 0;
             end
-            top <= 0;
+            top = 0;
         end
         else begin
             if (push) begin
                 top <= top + 1;
                 mem[top] <= din;
             end
-            if (pop) begin
+            else if (pop) begin
                 top = top - 1;
                 dout = mem[top];
             end
-            if (tos) begin
+            else if (tos) begin
                 dout = mem[top - 1];
+            end
+            else begin
+              dout = dout;
             end
         end
     end
