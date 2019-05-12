@@ -9,7 +9,7 @@ module controller (input clk, rst, input [2:0] opcode,  output reg IorD, srcA, s
         if (rst) ps <= If;
         else ps <= ns;
       end
-      always @ (ps, opcode) begin
+      always @ (ps, opcode) begin : State_changing_block
         case (ps)
           If: ns <= getTop;
           getTop: ns <= (opcode == 3'b100) ? readFromMem :
