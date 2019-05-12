@@ -37,7 +37,7 @@ module controller (input clk, rst, input [2:0] opcode,  output reg IorD, srcA, s
         case (ps)
           If: begin
             IorD = 0;
-            srcA = 0;
+            srcA = 1;
             srcB = 1;
             ALUop = 0;
             PCsrc = 0;
