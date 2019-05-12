@@ -85,6 +85,10 @@ module controller (input clk, rst, input [2:0] opcode,  output reg IorD, srcA, s
           pushRes: begin
             push = 1;
           end
+          writeToMem: begin
+            IorD = 1;
+            memWrite = 1;
+          end
         endcase
       end
 endmodule
